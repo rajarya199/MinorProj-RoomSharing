@@ -7,7 +7,16 @@ import Room from '../Pages/Rooms/Room'
 import Flat from '../Pages/Flats/Flat'
 import Hostel from '../Pages/Hostels/Hostel'
 import { Link } from 'react-router-dom'
+import { useSelector,useDispatch } from "react-redux";
+import { logout } from "../redux/userRedux"
+
 export default function Header() {
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = '/'
+  }
 
   return (
         <header >
@@ -46,19 +55,18 @@ export default function Header() {
               
             </ul>
             
-             <form className="d-flex" role="search" style={{border:'3px solid #ccc ',borderRadius:'8px',padding:'2px 1px',backgroundColor:'white'}} >
-              <input className="form-control " type="search" placeholder="Search" aria-label="Search" style={{border:'none',borderRadius:'8px',width:'100%',marginRight:'6px'}} />
-              
-              <span type='submit' className="fa fa-search my-2 " style={{fontSize:'20px'}}></span>
-
-            </form> 
- 
+      
       
     
+            {user ? <>
+           <h2> <a href='/profile' style={{color: 'White', textDecoration: 'none'}}> Welcome, {user?.username.slice(0,1).toUpperCase() + user?.username.slice(1, user?.username.length)}! </a></h2>
+            <button className="btn btn-outline-success mx-2 " type="submit" onClick={handleLogout}>Logout</button> 
+            </> : <>
+            <button className="btn btn-outline-success mx-2 " type="submit" style={{color:'white'}}> <Link to="/Register " className="nav-link" >Sign up</Link></button>
 
-            <button className="btn btn-outline-success mx-2 " type="submit"> <Link to="/Register " className="nav-link" >Sign in</Link></button>
-
-            <button className="btn btn-outline-success " type="submit"> <Link to="/Login " className="nav-link" >Login</Link></button>
+            <button className="btn btn-outline-success " type="submit" style={{color:'white'}}> <Link to="/Login " className="nav-link" >Login</Link></button>
+            </>
+          }
           </div>
         </div>
       </nav>

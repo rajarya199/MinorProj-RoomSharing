@@ -10,17 +10,29 @@ import flat2 from '/src/images/flat2.png'
 import room2 from '/src/images/room2.png'
 import room4 from '/src/images/room4.png'
 import hostel2 from '/src/images/hostel2.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom'
 export default function Home() {
   return (
     < >
       <div className=' d-flex  justify-content-end   ' style={{backgroundColor:'#E0F0FF',height:'50px' ,alignItems:'center'}}>
-      <Link to ='/#' style={{fontSize:'30px',marginRight:'10px',color:'orangered'}} > <i class="fa fa-heart-o"> Wishlist</i> </Link>
-
+     <Link to ='/Mywishlist' style={{marginRight:'10px'}} >  <button type="button" className="btn btn-success me-3 ">  <FontAwesomeIcon icon={faHeart} /> Wishlist</button>  </Link>
+    
+      
+      
       <Link to='/Addpost' > <button type="button" className="btn btn-success me-3 "> Post Listing</button></Link>
       </div>
-    <Mysearch></Mysearch>
+    {/* <Mysearch></Mysearch> */}
+    <div className=' flex' style={{width:'100%',
+    backgroundImage:'url(" /src/images/ktmcity2.jpg")',
+    height:'550px',
+    backgroundSize:'cover',
+    
+    
+    }}></div>
     <section>
       <div className='container'>
         <div className='row'>
@@ -31,7 +43,7 @@ export default function Home() {
           </p>
           <p style={{fontSize:'20px'}}>Don't waste time searching. Find like minded Roommates to share comfortable space.
              </p>
-             <Link to='/#'>  <button type="button-lg" className="btn mb-3 abc" >Find Roommate</button></Link>
+             <Link to='/roommate'>  <button type="button-lg" className="btn mb-3 abc" >Find Roommate</button></Link>
         
       </div>
       <div className='col-lg-8'>
@@ -54,7 +66,7 @@ export default function Home() {
           </p>
           <p style={{fontSize:'20px'}}> Rent your Property to tenants who are best fit according to your requirment/demands.
           List your properties today within few minutes.<br/><br/>
-          <Link to='/listform'>  <button type="button-lg" className="btn mb-3 abc" >List your Property</button></Link>
+          <Link to='/propertyform'>  <button type="button-lg" className="btn mb-3 abc" >List your Property</button></Link>
 
 </p>
           </div>
@@ -130,8 +142,10 @@ export default function Home() {
 
                                         <h4 className="card-title mt-3">Rent your Room</h4>
                                         <p className="card-text mt-3"> 
+                                        If you are planning to give your Flat for the rent and are searching for the tenants then you can advertise your Room in our sites. 
+
                                         </p>
-                                        <Link to='listform'> <button type="button" className="btn  me-3 ">  Add Room</button></Link>
+                                        <Link to='propertyform'> <button type="button" className="btn  me-3 ">  Add Room</button></Link>
 
                   </div>
 
@@ -147,9 +161,10 @@ export default function Home() {
                   <img src={flat2} className="roomie-img" alt="..." style={{backgroundSize:'auto',height:'200px'}}/>
 
                                         <h4 className="card-title mt-3">Rent your flat</h4>
-                                        <p className="card-text mt-3"> 
+                                        <p className="card-text mt-3">
+                                          If you are planning to give your Flat for the rent and are searching for the tenants then you can advertise your Room in our sites. 
                                         </p>
-                                        <Link to='listform'> <button type="button" className="btn me-3 ">  Add Flat</button></Link>
+                                        <Link to='/propertyform'> <button type="button" className="btn me-3 ">  Add Flat</button></Link>
 
                   </div>
 

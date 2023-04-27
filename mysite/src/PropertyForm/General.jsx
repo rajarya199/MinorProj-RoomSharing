@@ -12,8 +12,24 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { useState } from 'react';
 
-export default function General() {
+export default function General(props) {
+
+  const [firstname,setFirstName] = useState();
+  const [lastname,setLastName] = useState();
+  const [gender,setGender] = useState();
+  const [email,setEmail] = useState();
+  const [phoneno,setPhoneno] = useState();
+
+  const property = {
+    firstname: firstname,
+    lastname: lastname,
+    gender: gender,
+    email: email,
+    phoneno: phoneno
+  }
+  props.property(property)
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -30,6 +46,7 @@ export default function General() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            onChange={(event)=>setFirstName(event.target.value)}
           />
         </Grid>
 
@@ -42,6 +59,7 @@ export default function General() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            onChange={(event)=>setLastName(event.target.value)}
           />
           </Grid>
 
@@ -52,6 +70,7 @@ export default function General() {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        onChange={(event)=>setGender(event.target.value)}
       >
         <FormControlLabel value="female" control={<Radio />} label="Female" />
         <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -70,9 +89,11 @@ export default function General() {
             name="email"
             type="email" 
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+            onChange={(event)=>setEmail(event.target.value)}
             label="Enter your email"
             fullWidth
             variant="standard"
+            inputProps={{pattern:"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" }}
           />
         </Grid>
 
@@ -85,6 +106,7 @@ export default function General() {
             label="Enter your Phone Number"
             fullWidth
             variant="standard"
+            onChange={(event)=>setPhoneno(event.target.value)}
             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
           />
         </Grid>

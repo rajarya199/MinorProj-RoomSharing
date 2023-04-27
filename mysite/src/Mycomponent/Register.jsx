@@ -19,8 +19,11 @@ function Register() {
 
   const handleregister = async (event) => {
     event.preventDefault();
-    if(password===cpassword)
+    console.log(password)
+    console.log(username)
+    if(password.length >= 8 && password===cpassword && username.length >= 8 )
     {
+      console.log(username)
       const user = {
         // firstname,
         // lastname,
@@ -31,7 +34,7 @@ function Register() {
       } 
       try {
         setloading(true);
-        const result = await axios.post('http://localhost:5000/api/auth/register',user).data;
+        const res = await axios.post('http://localhost:5000/api/auth/register',user).data; 
         // const result= await fetch("http://localhost:5173/api/auth/register",
         // method="post",
         // body=JSON.stringify(user),
@@ -58,7 +61,7 @@ function Register() {
     }
     else
     {
-      alert('Passwords not matched');
+     seterror(true);
     }
   };
 
@@ -75,7 +78,7 @@ function Register() {
     }} >
         
         {loading && (<Loading />)}
-        {error && (<Error />)}
+        {error && (<Error message='Something Went Wrong!!!'/>)}
         {success && (<Success message='Registration Success' />)}
 
         <form action="/register" method='post' onSubmit={handleregister}>

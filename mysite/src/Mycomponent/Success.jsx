@@ -2,8 +2,8 @@
 const Success = ({message}) => {
   return (
     <div>
-      <div>
-        {message};
+      <div class="alert alert-success" role="alert">
+        {message}
       </div>
       
     </div>

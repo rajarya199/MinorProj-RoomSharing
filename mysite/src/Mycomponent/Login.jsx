@@ -4,34 +4,41 @@ import loginpic from '/src/images/login.jpg'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import loading from './Loading'
-import error from './Error'
-export default function login() {
+import Error from './Error'
+import { login } from "../redux/apiCalls"
+import { useDispatch, useSelector } from 'react-redux';
+
+export default function Login() {
 
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
 
-  const [loading,setloading] = useState(false);
-  const [error,seterror] = useState();
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+  // const [loading,setloading] = useState(false);
+  // const [error,seterror] = useState();
 
   const handleSubmit =  async (event) => {
     event.preventDefault();
-    const user = {
-      username,
-      password
-    };
-    try {
-      setloading(true);
-      const result = (await axios.post('http://localhost:5000/api/auth/login', user)).data;
-      setloading(false);
-      localStorage.setItem('currentUser', JSON.stringify(result));
-      window.location.href='/'
+    login(dispatch, { username, password });
 
-    } catch (error) {
+  //   const user = {
+  //     username,
+  //     password
+  //   };
+  //   try {
+  //     setloading(true);
+  //     const result = await axios.post('http://localhost:5000/api/auth/login', user).data;
+  //     setloading(false);
+  //     localStorage.setItem('currentUser', JSON.stringify(result));
+  //     window.location.href='/'
+
+  //   } catch (error) {
       
-      console.log(error);
-      setloading(false);
-      seterror(true);
-    }
+  //     console.log(error);
+  //     setloading(false);
+  //     seterror(true);
+  //   }
   };
   return (
     
@@ -50,6 +57,7 @@ export default function login() {
      backgroundColor:'ButtonHighlight',
     
     backgroundColor:'aliceblue'}}>
+      {error && <Error message='Something Went Wrong!!!'/>}
     <form  action="/login" method="post" onSubmit={handleSubmit}>
     <label for="username"> <b>Username:</b></label><br/>
     <input type="text" id="username" name="username" required style= {{width:'100%',padding:'10px 10px',marginBottom:'10px'}}

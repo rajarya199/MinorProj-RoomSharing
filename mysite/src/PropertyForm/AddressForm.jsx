@@ -8,6 +8,7 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { useState } from 'react';
 
 
 function DistrictSelect() {
@@ -17,8 +18,19 @@ function DistrictSelect() {
     setDistrict(event.target.value);}
   };
 
-export default function AddressForm() {
+export default function AddressForm(props) {
 
+  const [country,setCountry] = useState('Nepal');
+  const [province,setProvince] = useState();
+  const [district,setDistrict] = useState();
+  const [municipalityorvdc,setMunicipalityorvdc] = useState();
+  const [wardno,setWardno] = useState();
+  const [streetortole,setStreetortole] = useState();
+  const [latitude,setlatitude] = useState();
+  const [longitude,setlongitude] = useState();
+
+  const property = {country: country,province: province,district: district,municipalityorvdc: municipalityorvdc,wardno: wardno,streetortole: streetortole,longitude:longitude,latitude: latitude}
+  props.property(property);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -36,6 +48,7 @@ export default function AddressForm() {
               readOnly: true,
             }}
             variant="standard"
+            onChange={(event)=>setCountry(event.target.value)}
 
           />
         </Grid>
@@ -48,7 +61,7 @@ export default function AddressForm() {
             fullWidth
             select
             variant="standard"
-
+            onChange={(event)=>setProvince(event.target.value)}
           >
              <MenuItem value="Province 1" > Province 1</MenuItem>
       <MenuItem value="Madesh ">Madesh</MenuItem>
@@ -69,7 +82,7 @@ export default function AddressForm() {
           select
     
             variant="standard"
-
+            onChange={(event)=>setDistrict(event.target.value)}
           >
           
        <MenuItem  unselectable ><b>province1</b></MenuItem> 
@@ -188,6 +201,7 @@ export default function AddressForm() {
             fullWidth
     
             variant="standard"
+            onChange={(event)=>setMunicipalityorvdc(event.target.value)}
           />
         </Grid>
 
@@ -198,10 +212,12 @@ export default function AddressForm() {
             name="ward"
             type='number'
             label="Ward No"
+            
             fullWidth
             
             variant="standard"
             inputProps={{ pattern: "[0-9]*" ,min:'0',max:'32'}}
+            onChange={(event)=>setWardno(event.target.value)}
           />
         </Grid>
 
@@ -214,6 +230,31 @@ export default function AddressForm() {
             label="Tol/Street"
             fullWidth
             variant="standard"
+            onChange={(event)=>setStreetortole(event.target.value)}
+          />
+        </Grid> 
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="latitude"
+            name="Latitude"
+            
+            label="Latitude"
+            fullWidth
+            variant="standard"
+            onChange={(event)=>setlatitude(event.target.value)}
+          />
+        </Grid> 
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="longitude"
+            name="Longitude"
+            
+            label="Longitude"
+            fullWidth
+            variant="standard"
+            onChange={(event)=>setlongitude(event.target.value)}
           />
         </Grid> 
       </Grid>

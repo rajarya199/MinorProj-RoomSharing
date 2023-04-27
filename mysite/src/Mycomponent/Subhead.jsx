@@ -12,17 +12,17 @@ export default function Subhead() {
                 <ul className="nav nav-tabs nav-justified  ">
        
        <li className="nav-item  subtab  "   >
-         <Link className="nav-link  " style={{color:'white'}} to="/Room">Rooms</Link>
+         <a className="nav-link  " style={{color:'white'}} href="/Properties/Room">Rooms</a>
        </li>
        <li className="nav-item subtab"  >
-         <Link className="nav-link " style={{color:'white'}} to="/Flat">Flat/apartments</Link>
+         <a className="nav-link " style={{color:'white'}} href="/Properties/Flat">Flat/apartments</a>
        </li>
        <li className="nav-item subtab" >
-         <Link  className="nav-link" style={{color:'white'}}to="/Hostel">Hostels</Link>
+         <a  className="nav-link" style={{color:'white'}} href="/Properties/Hostel">Hostels</a>
        </li>
       
        <li className="nav-item subtab" >
-         <a className="nav-link" style={{color:'white'}} href="#">Roommate</a>
+         <a className="nav-link" style={{color:'white'}} href="/Roommate">Roommate</a>
        </li>
        </ul>
         </div>

@@ -1,6 +1,12 @@
 
 import React ,{ useState } from 'react'
 import { Link } from 'react-router-dom';
+import styled from 'styled-components'
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material'
+import { sliderItems } from '../data'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faMapMarkerAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 
   import {
     
@@ -8,49 +14,124 @@ import { Link } from 'react-router-dom';
     MDBCarouselItem,
     
   } from 'mdb-react-ui-kit';
+
+  const Container = styled.div`
+  width: 65%;
+  height: 85vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+`;
+
+const Arrow = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: ${props=>props.direction === 'left' && '10px'};
+  right: ${props=>props.direction === 'right'  && '10px'};
+  margin: auto;
+  cursor: pointer;
+  opacity: 0.75;
+  z-index: 2;
+
+  &:hover {
+    opacity: 1;
+    background-color: grey;
+  }
+`;
+
+
+
+const Wrapper = styled.div`
+  height: 100px;
+  display: flex;
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -60}vw);
+`;
+
+const Slide = styled.div`
+  width: 60vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #${props=>props.bg};
+`;
+
+const ImgContainer = styled.div`
+  height: 100%;
+  flex: 1;
+  padding-left: 115px;
+  padding-top: 20px;
+`;
+
+const Image = styled.img`
+  height: 80%;
+`;
+
+const InfoContainer = styled.div`
+  padding: 50px;
+  flex: 1;
+`;
+
+const Title = styled.h1`
+  font-size: 70px;
+`;
+
+const Desc = styled.p`
+  margin: 50px 0px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 3px;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+`;
 export default function Viewproperty() {
 
-   
+  const [slideIndex, setslideIndex] = useState(0);
+  const handleClick = (direction) => {
+    if(direction === 'left') {
+      setslideIndex(slideIndex > 0 ? slideIndex -1 : 2);
+    } else {
+      setslideIndex(slideIndex < 2 ? slideIndex + 1 : 0 );
+    }
+  }
 
 
   return (
     <div>
         <div className='container'  >
         <div className='row'>
-        <div className='col-lg-8 mt-2'>
-                <MDBCarousel showIndicators showControls fade>
-      <MDBCarouselItem
-        className='w-100 d-block  '
-        itemId={1}
-        src='https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg'
-        alt='...'
-        style={{height:'cover '}}
-      >
-        {/* <h6>pict1</h6>
-        <p>..</p> */}
-      </MDBCarouselItem>
-
-      <MDBCarouselItem
-        className='w-100 d-block'
-        itemId={2}
-        src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg'
-        alt='...'
-      >
-        
-      </MDBCarouselItem>
-
-      <MDBCarouselItem
-        className='w-100 d-block'
-        itemId={3}
-        src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg'
-        alt='...'
-      >
-        {/* <h5>pict3</h5>
-        <p>..</p> */}
-      </MDBCarouselItem>
-    </MDBCarousel>
-    </div>
-        <div className='col-lg-4 mt-2' style={{backgroundColor:'aliceblue'}}>
+        <Container>
+      <Arrow direction='left' onClick={() => handleClick('left')}>
+        <ArrowLeftOutlined />
+      </Arrow>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map(item => (         
+          <Slide bg={item.bg}>
+            <ImgContainer>         
+             <Image src={item.img} />
+            </ImgContainer>
+          </Slide>
+        ))}
+      </Wrapper>
+      <Arrow direction='right' onClick={() => handleClick('right')}> 
+        <ArrowRightOutlined />
+      </Arrow>      
+    </Container>
+  
+        {/* <div className='col-lg-4 mt-2' style={{backgroundColor:'aliceblue'}}>
                     <div  className=' mt-3' style={{border:' solid #ccc ',  padding:'1px ', borderRadius:'10px',}}>
                         <h4 className='mt-3 mx-2 ' style={{color:'green'}}> <b>Room For Rent In Satbobato</b></h4><br/>
                         <h5 className='mx-4 mb-3'> <b>Location: Satdobato</b></h5>
@@ -59,6 +140,23 @@ export default function Viewproperty() {
                      <div className='mt-5 mx-5'>
                      <Link to="/" className="btn btn-success  mb-1 me-3 ">Contact </Link>
                      <Link to="/" className="btn btn-primary  mb-1 ">Add To My wishlist</Link>
+                     </div>
+
+                    
+    </div> */}
+       <div className='col-lg-4 mt-2' >
+                    <div  className=' mt-3 bs' style={{border:' solid #ccc ',  padding:'1px ', borderRadius:'10px',}}>
+                        <h4 className='mt-3 mx-2 ' style={{color:'green'}}> <b>Room For Rent In Satbobato</b></h4><br/>
+            
+                        <FontAwesomeIcon  style={{marginLeft:'3em'}} icon={faMapMarkerAlt} /> <span style={{fontSize:'20px',}}> Satdobato</span> 
+
+                        <div className='mx-5 mb-2 mt-2' style={{fontSize:'20px'}}> Price: Rs 100000 </div>
+                        {/* <FontAwesomeIcon className='mb-2' style={{marginLeft:'3em'}} icon={faPhone} /><span style={{fontSize:'20px'}}>12345678 ,345678 </span> <br/> */}
+
+                     
+                        <Link to="/" className="btn btn-success mx-3 mb-1 me-3 ">Contact </Link>
+
+                     <Link to="/Mywishlist" className="btn btn-primary  mb-3  mt-3">Add To My wishlist</Link>
                      </div>
 
                     
@@ -222,8 +320,8 @@ width:'90%' }}>
  <div className="row mt-4">
    <div className="col-lg-4 mb-3 shadow" style={{ border:'3px solid #ccc',borderRadius:'10px'}}>
      <form>
-       <input type="text" className="form-control mt-3 " placeholder="Name" />
-       <input type="email" className="form-control mt-3" placeholder="Email" />
+       <input type="text" className="form-control mt-3 " placeholder="Name" required />
+       <input type="email" className="form-control mt-3" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  required/>
        
        <div className="mb-3 mt-3">
          <textarea className="form-control" rows={5} id="comment" name="text" placeholder="Comment" defaultValue={""} />

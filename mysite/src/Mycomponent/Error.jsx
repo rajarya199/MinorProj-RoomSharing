@@ -3,7 +3,7 @@
 const Error = ({message}) => {
   return (
     <div>
-      <div>
+      <div class="alert alert-danger" role="alert">
         {message}
       </div>
     </div>

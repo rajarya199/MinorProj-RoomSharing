@@ -11,8 +11,8 @@ export default function Contact() {
         <div className="row mt-4">
           <div className="col-lg-6 mb-3 shadow" style={{ border:'3px solid #ccc',borderRadius:'10px'}}>
             <form>
-              <input type="text" className="form-control mt-3 " placeholder="Name" />
-              <input type="email" className="form-control mt-3" placeholder="Email" />
+              <input type="text" className="form-control mt-3 " placeholder="Name" required />
+              <input type="email" className="form-control mt-3" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
               <input type="text" className="form-control mt-3" placeholder="Subject" />
               <div className="mb-3 mt-3">
                 <textarea className="form-control" rows={5} id="comment" name="text" placeholder="Message" defaultValue={""} />
